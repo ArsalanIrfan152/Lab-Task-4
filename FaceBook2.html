@@ -1,0 +1,1326 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Facebook – Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #0e1117;
+            --surface: #161b24;
+            --surface2: #1c2333;
+            --border: rgba(255,255,255,0.07);
+            --blue: #1877f2;
+            --accent: #00d4ff;
+            --gold: #f5c518;
+            --green: #00e676;
+            --red: #ff4757;
+            --text: #e8eaf0;
+            --muted: rgba(255,255,255,0.45);
+            --nav-h: 60px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            font-family: 'Sora',sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            height: var(--nav-h);
+            background: rgba(22,27,36,0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display',serif;
+            font-size: 1.7rem;
+            color: var(--accent);
+            letter-spacing: -1px;
+            text-shadow: 0 0 20px rgba(0,212,255,0.4);
+        }
+
+            .nav-logo span {
+                color: var(--blue);
+            }
+
+        .nav-search {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 8px 16px;
+            width: 240px;
+        }
+
+            .nav-search input {
+                background: none;
+                border: none;
+                outline: none;
+                color: var(--text);
+                font-size: 0.88rem;
+                width: 100%;
+            }
+
+            .nav-search i {
+                color: var(--muted);
+            }
+
+        .nav-icons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .nav-icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.06);
+            border: none;
+            color: var(--text);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: background 0.2s;
+        }
+
+            .nav-icon-btn:hover {
+                background: rgba(255,255,255,0.12);
+            }
+
+        .badge-dot {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--red);
+            border: 2px solid var(--surface);
+        }
+
+        .nav-tabs-center {
+            display: flex;
+            gap: 2px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .nav-tab {
+            padding: 8px 28px;
+            border: none;
+            background: none;
+            color: var(--muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+
+            .nav-tab:hover {
+                background: rgba(255,255,255,0.05);
+                color: var(--text);
+            }
+
+            .nav-tab.active {
+                color: var(--blue);
+                border-bottom-color: var(--blue);
+            }
+
+        .nav-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,var(--blue),var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        /* ── LAYOUT ── */
+        .layout {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: calc(var(--nav-h) + 20px) 16px 40px;
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 24px;
+        }
+
+        /* ── LEFT SIDEBAR ── */
+        .left-sidebar {
+            position: sticky;
+            top: calc(var(--nav-h)+12px);
+            height: fit-content;
+        }
+
+        .profile-mini {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+            .profile-mini:hover {
+                border-color: rgba(255,255,255,0.15);
+            }
+
+        .profile-mini-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg,#f093fb,#f5576c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 0 0 3px rgba(240,147,251,0.25);
+        }
+
+        .profile-mini-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .profile-mini-sub {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+
+        .sidebar-menu {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid var(--border);
+        }
+
+            .sidebar-item:last-child {
+                border-bottom: none;
+            }
+
+            .sidebar-item:hover {
+                background: rgba(255,255,255,0.04);
+            }
+
+        .sidebar-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .sidebar-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .sidebar-label {
+            padding: 14px 16px 8px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        /* ── FEED ── */
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* Stories */
+        .stories-row {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .stories-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .story-card {
+            flex-shrink: 0;
+            width: 90px;
+            height: 130px;
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid var(--border);
+            transition: transform 0.2s,border-color 0.2s;
+        }
+
+            .story-card:hover {
+                transform: scale(1.04);
+                border-color: var(--accent);
+            }
+
+        .story-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: linear-gradient(160deg,var(--c1),var(--c2));
+        }
+
+        .story-add-btn {
+            position: absolute;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--blue);
+            border: 3px solid var(--surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .story-name {
+            position: absolute;
+            bottom: 6px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+        }
+
+        .story-avatar {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2.5px solid var(--blue);
+            background: linear-gradient(135deg,var(--c1),var(--c2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Create Post */
+        .create-post {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+        }
+
+        .create-post-top {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .create-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: linear-gradient(135deg,#f093fb,#f5576c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .create-input {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 10px 18px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Sora',sans-serif;
+        }
+
+            .create-input:hover {
+                background: rgba(255,255,255,0.08);
+                border-color: rgba(255,255,255,0.12);
+            }
+
+        .create-actions {
+            display: flex;
+            gap: 4px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+        }
+
+        .create-action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 9px;
+            border-radius: 10px;
+            border: none;
+            background: none;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s,color 0.2s;
+            font-family: 'Sora',sans-serif;
+        }
+
+            .create-action-btn:hover {
+                background: rgba(255,255,255,0.06);
+                color: var(--text);
+            }
+
+        /* Post Card */
+        .post-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .post-card:nth-child(2) {
+            animation-delay: 0.1s
+        }
+
+        .post-card:nth-child(3) {
+            animation-delay: 0.2s
+        }
+
+        .post-card:nth-child(4) {
+            animation-delay: 0.3s
+        }
+
+        .post-header {
+            padding: 16px 18px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .post-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+
+        .post-author {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .post-meta {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+            .post-meta i {
+                font-size: 0.7rem;
+            }
+
+        .post-more {
+            margin-left: auto;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 8px;
+        }
+
+            .post-more:hover {
+                background: rgba(255,255,255,0.06);
+                color: var(--text);
+            }
+
+        .post-body {
+            padding: 0 18px 14px;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .post-image {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            background: var(--surface2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .cricket-banner {
+            background: linear-gradient(135deg,#1a3a1a 0%,#0a2a10 50%,#1a1a0a 100%);
+            padding: 20px 18px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .cricket-banner::before {
+                content: '🏏';
+                position: absolute;
+                right: -10px;
+                top: -10px;
+                font-size: 7rem;
+                opacity: 0.08;
+            }
+
+        .cricket-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0,230,118,0.15);
+            border: 1px solid rgba(0,230,118,0.3);
+            color: var(--green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+            .cricket-tag i {
+                font-size: 0.65rem;
+            }
+
+        .cricket-banner h3 {
+            font-family: 'Playfair Display',serif;
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .score-box {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .score-chip {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 10px 14px;
+            text-align: center;
+            min-width: 90px;
+        }
+
+            .score-chip .team {
+                font-size: 0.7rem;
+                color: var(--muted);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+            .score-chip .runs {
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: #fff;
+                font-family: 'Playfair Display',serif;
+            }
+
+            .score-chip .overs {
+                font-size: 0.72rem;
+                color: var(--muted);
+            }
+
+        .vs-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            padding: 10px 8px;
+        }
+
+        .result-tag {
+            display: inline-block;
+            margin-top: 10px;
+            background: rgba(245,197,24,0.15);
+            border: 1px solid rgba(245,197,24,0.3);
+            color: var(--gold);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .post-stats {
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        .post-actions {
+            padding: 6px 10px;
+            display: flex;
+            gap: 4px;
+            border-top: 1px solid var(--border);
+        }
+
+        .action-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 9px;
+            border-radius: 10px;
+            border: none;
+            background: none;
+            color: var(--muted);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'Sora',sans-serif;
+        }
+
+            .action-btn:hover {
+                background: rgba(255,255,255,0.06);
+                color: var(--text);
+            }
+
+            .action-btn.liked {
+                color: var(--blue);
+            }
+
+        /* ── RIGHT SIDEBAR ── */
+        .right-sidebar {
+            position: sticky;
+            top: calc(var(--nav-h)+12px);
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .widget {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .widget-header {
+            padding: 14px 16px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .widget-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .widget-see-all {
+            font-size: 0.8rem;
+            color: var(--blue);
+            cursor: pointer;
+        }
+
+            .widget-see-all:hover {
+                text-decoration: underline;
+            }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .contact-item:hover {
+                background: rgba(255,255,255,0.04);
+            }
+
+        .contact-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.82rem;
+            color: #fff;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .online-dot {
+            position: absolute;
+            bottom: 1px;
+            right: 1px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+            border: 2px solid var(--surface);
+        }
+
+        .contact-name {
+            font-size: 0.88rem;
+            font-weight: 500;
+        }
+
+        /* Cricket Scores Widget */
+        .scores-widget {
+            background: linear-gradient(135deg,var(--surface) 0%,#1a2a1a 100%);
+            border-color: rgba(0,230,118,0.15);
+        }
+
+        .match-row {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+        }
+
+            .match-row:first-child {
+                border-top: none;
+            }
+
+        .match-teams {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .team-name {
+            font-size: 0.83rem;
+            font-weight: 600;
+        }
+
+        .match-score {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--green);
+            font-family: 'Playfair Display',serif;
+        }
+
+        .match-status {
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(255,71,87,0.15);
+            color: var(--red);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            border: 1px solid rgba(255,71,87,0.3);
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--red);
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%,100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: 0.3
+            }
+        }
+
+        /* Trending */
+        .trend-item {
+            padding: 10px 16px;
+            border-top: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .trend-item:hover {
+                background: rgba(255,255,255,0.03);
+            }
+
+        .trend-num {
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+        .trend-text {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .trend-count {
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        @media(max-width:1024px) {
+            .layout {
+                grid-template-columns: 240px 1fr;
+            }
+
+            .right-sidebar {
+                display: none;
+            }
+        }
+
+        @media(max-width:700px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .left-sidebar {
+                display: none;
+            }
+
+            .nav-search {
+                display: none;
+            }
+
+            .nav-tabs-center {
+                position: static;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-logo">face<span>book</span></div>
+
+        <div class="nav-tabs-center">
+            <button class="nav-tab active"><i class="fas fa-home"></i></button>
+            <button class="nav-tab"><i class="fas fa-play-circle"></i></button>
+            <button class="nav-tab"><i class="fas fa-store"></i></button>
+            <button class="nav-tab"><i class="fas fa-users"></i></button>
+            <button class="nav-tab"><i class="fas fa-gamepad"></i></button>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;">
+            <div class="nav-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Facebook..." />
+            </div>
+            <div class="nav-icons">
+                <button class="nav-icon-btn"><i class="fas fa-th"></i></button>
+                <button class="nav-icon-btn"><i class="fas fa-comment-alt"></i><span class="badge-dot"></span></button>
+                <button class="nav-icon-btn"><i class="fas fa-bell"></i><span class="badge-dot"></span></button>
+            </div>
+            <div class="nav-avatar">ZA</div>
+        </div>
+    </nav>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+
+        <!-- LEFT SIDEBAR -->
+        <aside class="left-sidebar">
+            <div class="profile-mini">
+                <div class="profile-mini-avatar">ZA</div>
+                <div>
+                    <div class="profile-mini-name">Zara Ahmed</div>
+                    <div class="profile-mini-sub">View your profile</div>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <div class="sidebar-label">Menu</div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background:rgba(24,119,242,0.15);color:var(--blue)"><i class="fas fa-user-friends"></i></div>
+                    <span>Friends</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background:rgba(0,230,118,0.12);color:var(--green)"><i class="fas fa-store"></i></div>
+                    <span>Marketplace</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background:rgba(245,197,24,0.12);color:var(--gold)"><i class="fas fa-play-circle"></i></div>
+                    <span>Watch</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background:rgba(255,71,87,0.12);color:var(--red)"><i class="fas fa-calendar-alt"></i></div>
+                    <span>Events</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background:rgba(0,212,255,0.12);color:var(--accent)"><i class="fas fa-newspaper"></i></div>
+                    <span>News Feed</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background:rgba(240,147,251,0.12);color:#f093fb"><i class="fas fa-bookmark"></i></div>
+                    <span>Saved</span>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background:rgba(255,255,255,0.06);color:var(--muted)"><i class="fas fa-ellipsis-h"></i></div>
+                    <span>See More</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- FEED -->
+        <main class="feed">
+
+            <!-- Stories -->
+            <div class="stories-row">
+                <div style="font-size:0.8rem;font-weight:600;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:1px;">Stories</div>
+                <div class="stories-scroll">
+                    <!-- Add story -->
+                    <div class="story-card" style="--c1:#1877f2;--c2:#0a5adf;background:var(--surface2);">
+                        <div style="height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:18px;background:var(--surface2);">
+                            <div class="story-add-btn"><i class="fas fa-plus"></i></div>
+                            <div class="story-name" style="position:static;margin-top:6px;color:var(--text);">Add Story</div>
+                        </div>
+                    </div>
+                    <!-- Friend stories -->
+                    <div class="story-card" style="--c1:#f093fb;--c2:#f5576c;background:linear-gradient(160deg,#f093fb,#f5576c);">
+                        <div class="story-avatar" style="--c1:#f093fb;--c2:#f5576c;">ZA</div>
+                        <div class="story-name">Zara Ahmed</div>
+                    </div>
+                    <div class="story-card" style="background:linear-gradient(160deg,#4facfe,#00f2fe);">
+                        <div class="story-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">HK</div>
+                        <div class="story-name">Hassan Khan</div>
+                    </div>
+                    <div class="story-card" style="background:linear-gradient(160deg,#43e97b,#38f9d7);">
+                        <div class="story-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">SR</div>
+                        <div class="story-name">Sara Raza</div>
+                    </div>
+                    <div class="story-card" style="background:linear-gradient(160deg,#fa709a,#fee140);">
+                        <div class="story-avatar" style="background:linear-gradient(135deg,#fa709a,#fee140);">AM</div>
+                        <div class="story-name">Ali Mirza</div>
+                    </div>
+                    <div class="story-card" style="background:linear-gradient(160deg,#a18cd1,#fbc2eb);">
+                        <div class="story-avatar" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb);">NI</div>
+                        <div class="story-name">Nadia Iqbal</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Post -->
+            <div class="create-post">
+                <div class="create-post-top">
+                    <div class="create-avatar">ZA</div>
+                    <div class="create-input">What's on your mind, Zara?</div>
+                </div>
+                <div class="create-actions">
+                    <button class="create-action-btn"><i class="fas fa-video" style="color:#f44336"></i> Live video</button>
+                    <button class="create-action-btn"><i class="fas fa-image" style="color:#4caf50"></i> Photo/video</button>
+                    <button class="create-action-btn"><i class="fas fa-smile" style="color:#ff9800"></i> Feeling</button>
+                </div>
+            </div>
+
+            <!-- POST 1 — Cricket World Cup News -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar" style="background:linear-gradient(135deg,#1a6b1a,#2e8b1e);">🏏</div>
+                    <div>
+                        <div class="post-author">ICC Cricket World Cup 2025</div>
+                        <div class="post-meta"><i class="fas fa-globe"></i> &nbsp;Official • 2h ago</div>
+                    </div>
+                    <div class="post-more"><i class="fas fa-ellipsis-h"></i></div>
+                </div>
+                <div class="post-body">
+                    🏆 <strong>Pakistan clinches a thrilling victory over South Africa</strong> in the ICC Cricket World Cup 2025 semi-final!<br /><br />
+                    Babar Azam's masterclass innings of <strong>127* off 118 balls</strong> guided Pakistan to chase down 298 runs with 2 wickets to spare. Shaheen Afridi took <strong>4 wickets</strong> in the first innings to restrict South Africa to 297.
+                    <br /><br />
+                    Pakistan will face Australia in the <strong>FINAL on Saturday at Melbourne Cricket Ground!</strong> 🎉🇵🇰
+                </div>
+                <div class="cricket-banner">
+                    <div class="cricket-tag"><span class="live-dot" style="display:inline-block;"></span> SEMI-FINAL RESULT</div>
+                    <h3>Pakistan 🆚 South Africa</h3>
+                    <div class="score-box">
+                        <div class="score-chip">
+                            <div class="team">🇿🇦 South Africa</div>
+                            <div class="runs">297/8</div>
+                            <div class="overs">50 overs</div>
+                        </div>
+                        <div class="vs-badge">VS</div>
+                        <div class="score-chip">
+                            <div class="team">🇵🇰 Pakistan</div>
+                            <div class="runs">301/8</div>
+                            <div class="overs">49.3 overs</div>
+                        </div>
+                    </div>
+                    <div class="result-tag">🏆 Pakistan Won by 2 Wickets</div>
+                </div>
+                <div class="post-stats">
+                    <span><i class="fas fa-thumbs-up" style="color:var(--blue)"></i> <i class="fas fa-heart" style="color:var(--red)"></i> 48.2K</span>
+                    <span>12.4K comments &nbsp;·&nbsp; 8.7K shares</span>
+                </div>
+                <div class="post-actions">
+                    <button class="action-btn liked"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="action-btn"><i class="fas fa-comment"></i> Comment</button>
+                    <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+
+            <!-- POST 2 — Personal post -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">HK</div>
+                    <div>
+                        <div class="post-author">Hassan Khan</div>
+                        <div class="post-meta"><i class="fas fa-users"></i> &nbsp;Friends • 5h ago</div>
+                    </div>
+                    <div class="post-more"><i class="fas fa-ellipsis-h"></i></div>
+                </div>
+                <div class="post-body">
+                    Watching the World Cup with family! 🏏🎉 Can't believe Pakistan is in the final! Babar Azam was absolutely SENSATIONAL today. These are the moments you live for as a cricket fan 🇵🇰❤️<br />
+                    <br />
+                    Who's watching the final this Saturday? Comment below! 👇
+                </div>
+                <div style="background:linear-gradient(135deg,#0a1628,#0f2744);padding:16px 18px;display:flex;gap:12px;align-items:center;">
+                    <div style="font-size:3.5rem;">🎊</div>
+                    <div>
+                        <div style="font-size:1.1rem;font-weight:700;color:#fff;">PAKISTAN IS IN THE FINAL!</div>
+                        <div style="font-size:0.85rem;color:var(--muted);margin-top:4px;">ICC Cricket World Cup 2025 · Melbourne</div>
+                    </div>
+                </div>
+                <div class="post-stats">
+                    <span><i class="fas fa-thumbs-up" style="color:var(--blue)"></i> <i class="fas fa-heart" style="color:var(--red)"></i> 1.2K</span>
+                    <span>346 comments &nbsp;·&nbsp; 512 shares</span>
+                </div>
+                <div class="post-actions">
+                    <button class="action-btn"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="action-btn"><i class="fas fa-comment"></i> Comment</button>
+                    <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+
+            <!-- POST 3 — Zara's post -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c);">ZA</div>
+                    <div>
+                        <div class="post-author">Zara Ahmed</div>
+                        <div class="post-meta"><i class="fas fa-lock"></i> &nbsp;Only me • Just now</div>
+                    </div>
+                    <div class="post-more"><i class="fas fa-ellipsis-h"></i></div>
+                </div>
+                <div class="post-body">
+                    Just got tickets for the Cricket World Cup Final! 🏟️✈️ Melbourne here we come! Already screaming 😭🏏🇵🇰 <br /><br />
+                    Thank you to Ali Mirza for sorting this out!! Greatest friend ever 🙌
+                </div>
+                <div class="post-stats">
+                    <span><i class="fas fa-thumbs-up" style="color:var(--blue)"></i> 847</span>
+                    <span>102 comments</span>
+                </div>
+                <div class="post-actions">
+                    <button class="action-btn liked"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="action-btn"><i class="fas fa-comment"></i> Comment</button>
+                    <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+
+            <!-- POST 4 — World Cup Schedule -->
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar" style="background:linear-gradient(135deg,#1a6b1a,#2e8b1e);">🏏</div>
+                    <div>
+                        <div class="post-author">ICC Cricket World Cup 2025</div>
+                        <div class="post-meta"><i class="fas fa-globe"></i> &nbsp;Official • 8h ago</div>
+                    </div>
+                    <div class="post-more"><i class="fas fa-ellipsis-h"></i></div>
+                </div>
+                <div class="post-body">
+                    📋 <strong>World Cup 2025 Final Confirmed!</strong><br /><br />
+                    🗓️ <strong>Date:</strong> Saturday, 6 March 2025<br />
+                    🏟️ <strong>Venue:</strong> Melbourne Cricket Ground, Australia<br />
+                    🕙 <strong>Start Time:</strong> 10:00 AM AEST (05:00 AM PKT)<br /><br />
+                    🏆 <strong>Pakistan 🇵🇰 vs Australia 🇦🇺</strong><br /><br />
+                    This is going to be the clash of the titans! Don't miss it! Set your reminders now 🔔
+                </div>
+                <div style="background:linear-gradient(135deg,#0d1f0d,#1a3320);padding:16px 18px;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                        <span style="font-size:0.75rem;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:1px;">🏆 WORLD CUP FINAL</span>
+                        <span style="font-size:0.75rem;color:var(--muted);">Sat, 6 March</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div style="text-align:center;">
+                            <div style="font-size:2rem;">🇵🇰</div>
+                            <div style="font-weight:700;font-size:0.9rem;margin-top:4px;">Pakistan</div>
+                        </div>
+                        <div style="text-align:center;padding:12px 20px;background:rgba(245,197,24,0.1);border-radius:12px;border:1px solid rgba(245,197,24,0.2);">
+                            <div style="font-size:0.7rem;color:var(--gold);font-weight:700;">FINAL</div>
+                            <div style="font-size:1.4rem;font-weight:900;color:var(--gold);">VS</div>
+                            <div style="font-size:0.65rem;color:var(--muted);">MCG, Melbourne</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:2rem;">🇦🇺</div>
+                            <div style="font-weight:700;font-size:0.9rem;margin-top:4px;">Australia</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-stats">
+                    <span><i class="fas fa-thumbs-up" style="color:var(--blue)"></i> <i class="fas fa-heart" style="color:var(--red)"></i> 92.1K</span>
+                    <span>23.8K comments &nbsp;·&nbsp; 41.2K shares</span>
+                </div>
+                <div class="post-actions">
+                    <button class="action-btn"><i class="fas fa-thumbs-up"></i> Like</button>
+                    <button class="action-btn"><i class="fas fa-comment"></i> Comment</button>
+                    <button class="action-btn"><i class="fas fa-share"></i> Share</button>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="right-sidebar">
+
+            <!-- Live Scores Widget -->
+            <div class="widget scores-widget">
+                <div class="widget-header">
+                    <div class="widget-title" style="color:var(--green);">🏏 Live Scores</div>
+                    <div class="widget-see-all">View all</div>
+                </div>
+                <div class="match-row">
+                    <div class="match-teams">
+                        <span class="team-name">🇵🇰 Pakistan</span>
+                        <span class="match-score">301/8</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="team-name" style="font-size:0.83rem;">🇿🇦 South Africa</span>
+                        <span class="match-score" style="color:var(--muted);">297/8</span>
+                    </div>
+                    <div class="match-status mt-1" style="color:var(--gold);">🏆 Pakistan Won by 2 Wickets — Semi-Final</div>
+                </div>
+                <div class="match-row">
+                    <div class="match-teams">
+                        <span class="team-name">🇦🇺 Australia</span>
+                        <span class="match-score">287/6</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <span class="team-name" style="font-size:0.83rem;">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</span>
+                        <span class="match-score" style="color:var(--muted);">241/10</span>
+                    </div>
+                    <div class="match-status mt-1" style="color:var(--gold);">🏆 Australia Won by 46 Runs — Semi-Final</div>
+                </div>
+                <div class="match-row">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                        <span style="font-size:0.8rem;font-weight:600;">🇮🇳 India vs 🇱🇰 Sri Lanka</span>
+                        <span class="live-badge"><span class="live-dot"></span>LIVE</span>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;">
+                        <span class="match-score" style="font-size:0.85rem;">IND: 214/4</span>
+                        <span class="match-status">34.2 overs</span>
+                    </div>
+                    <div class="match-status mt-1">3rd Place Playoff — Colombo</div>
+                </div>
+            </div>
+
+            <!-- Contacts -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-title">Contacts</div>
+                    <div style="display:flex;gap:8px;">
+                        <span style="color:var(--muted);cursor:pointer;font-size:0.9rem;"><i class="fas fa-video"></i></span>
+                        <span style="color:var(--muted);cursor:pointer;font-size:0.9rem;"><i class="fas fa-search"></i></span>
+                        <span style="color:var(--muted);cursor:pointer;font-size:0.9rem;"><i class="fas fa-ellipsis-h"></i></span>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">HK<span class="online-dot"></span></div>
+                    <span class="contact-name">Hassan Khan</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7);">SR<span class="online-dot"></span></div>
+                    <span class="contact-name">Sara Raza</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar" style="background:linear-gradient(135deg,#fa709a,#fee140);">AM<span class="online-dot"></span></div>
+                    <span class="contact-name">Ali Mirza</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb);">NI</div>
+                    <span class="contact-name">Nadia Iqbal</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar" style="background:linear-gradient(135deg,#ffeaa7,#fdcb6e);">OB</div>
+                    <span class="contact-name">Omar Baig</span>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-avatar" style="background:linear-gradient(135deg,#fd79a8,#e17055);">LS<span class="online-dot"></span></div>
+                    <span class="contact-name">Layla Sheikh</span>
+                </div>
+            </div>
+
+            <!-- Trending Topics -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-title">Trending Now</div>
+                    <div class="widget-see-all">See all</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-num">1 · Cricket</div>
+                    <div class="trend-text">#CWC2025Final 🏆</div>
+                    <div class="trend-count">2.1M posts</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-num">2 · Sports</div>
+                    <div class="trend-text">#BabarAzam127</div>
+                    <div class="trend-count">890K posts</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-num">3 · Cricket</div>
+                    <div class="trend-text">#ShahAfridigGoesOff</div>
+                    <div class="trend-count">445K posts</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-num">4 · Sports</div>
+                    <div class="trend-text">#PAKvAUS Final</div>
+                    <div class="trend-count">312K posts</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-num">5 · Entertainment</div>
+                    <div class="trend-text">#MCGFinal2025</div>
+                    <div class="trend-count">198K posts</div>
+                </div>
+            </div>
+
+            <div style="font-size:0.72rem;color:rgba(255,255,255,0.2);padding:0 4px;line-height:1.8;">
+                Privacy · Terms · Advertising · Cookies<br />
+                Facebook © 2025
+            </div>
+
+        </aside>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+  // Like button toggle
+  document.querySelectorAll('.action-btn').forEach(btn => {
+    if(btn.textContent.includes('Like')) {
+      btn.addEventListener('click', function(){
+        this.classList.toggle('liked');
+        const icon = this.querySelector('i');
+        if(this.classList.contains('liked')){
+          icon.style.color='var(--blue)';
+        } else {
+          icon.style.color='';
+        }
+      });
+    }
+  });
+  // Nav tab switch
+  document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+    </script>
+</body>
+</html>
